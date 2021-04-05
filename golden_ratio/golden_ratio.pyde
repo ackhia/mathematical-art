@@ -9,40 +9,48 @@ i = 1
 c = random()
 def gr():
     global c
-    for _ in range(randint(0,10)):
-        c += golden_ratio_conjugate
-        c %= 1.0
-    #print c
+    c += golden_ratio_conjugate * randint(0,20)
+    c %= 1.0
     return c
 
+def face(x, y, s, a, wink=False):
+        pushMatrix()
+        colour = gr()
+        fill(colour,0.5,0.95)
+        translate(x, y)
+        rotate(a)
+        circle(0, 0, s)
+        fill(colour,gr(),0.95)
+        ss = s / 3 * golden_ratio_conjugate
+        circle(ss, ss, ss)
+        fill(colour,gr(),0.95)
+        circle(ss, 0-ss, ss/2)
+        if wink:
+            scale(0.5, 1);
+        circle(0-ss, ss, ss/2)
+        popMatrix()
 
-for _ in range(1000):
-    fill(gr(),0.5,0.95)
-    x = gr() * width 
-    y = gr() * height 
-    #print x, y, width, height
-    s = gr() * 300
-    circle(x, y, s)
+def dots(n, max_size):
+    for _ in range(n):
+        x = gr() * width 
+        y = gr() * height 
+        s = gr() * max_size
+        a = gr() * TWO_PI
+        face(x, y, s, a)
+
+dots(300, 200)
     
-
 filter(BLUR, 20)
+
+dots(500, 150)
     
-for _ in range(100):
-    fill(gr(),0.5,0.95)
-    x = gr() * width 
-    y = gr() * height 
-    #print x, y, width, height
-    s = gr() * 150
-    circle(x, y, s)
     
-filter(BLUR, 20);   
+dots(600, 80)
+
+filter(BLUR, 0.3); 
     
-for _ in range(1800):
-    fill(gr(),0.5,0.95)
-    x = gr() * width 
-    y = gr() * height 
-    #print x, y, width, height
-    s = gr() * 50
-    circle(x, y, s)
-    
-filter(ERODE)
+dots(10, 200)
+
+filter(BLUR, 1); 
+
+face(width*golden_ratio_conjugate, height*golden_ratio_conjugate, 225, 0)

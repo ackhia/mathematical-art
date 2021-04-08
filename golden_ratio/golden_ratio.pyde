@@ -8,8 +8,8 @@ def setup():
     frameRate(60)
     colorMode(HSB, 1, 1, 1)
     dots.append(list(create_dots(80, 200)))
-    dots.append(list(create_dots(50, 150)))
-    dots.append(list(create_dots(100, 80)))
+    dots.append(list(create_dots(199, 150)))
+    dots.append(list(create_dots(500, 80)))
     dots.append(list(create_dots(10, 200)))
 
 c = random()
@@ -64,8 +64,8 @@ bgc = gr()
 def animate():
     for l in dots:
         for d in l:
-            d["x"] += d["vol_x"] * 15
-            d["y"] += d["vol_y"] * 15
+            d["x"] += d["vol_x"] * 8
+            d["y"] += d["vol_y"] * 8
             d["x"] = d["x"] % width
             d["y"] = d["y"] % height
             d["a"] += d["rotation_vol"] / 5
@@ -80,17 +80,17 @@ def draw():
     background(bgc, golden_ratio_conjugate, 0.9);
     draw_dots(dots[0])
 
-    #filter(BLUR, 20)
+    filter(BLUR, 20)
     
     draw_dots(dots[1])
         
     draw_dots(dots[2])
     
-   # filter(BLUR, 0.3); 
+    filter(BLUR, 0.3); 
         
     draw_dots(dots[3])
     
-    #filter(BLUR, 1); 
+    filter(BLUR, 1); 
     
     global a
     a += -0.1
@@ -98,3 +98,4 @@ def draw():
     
     animate()
     print(frameRate)
+    saveFrame("frames/######.tif")
